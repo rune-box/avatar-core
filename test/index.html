@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Production</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script defer="defer" src="../dist/avatar.js?v=202203221846"></script>
+</head>
+
+<body></body>
+
+<script>
+    var ctx;
+    function testENS() {
+        ctx = new AvatarCore.ID.ENSContext(null);
+        ctx.getAvatarUri("0xd8da6bf26964af9d7eed9e03e53415d37aa96045").then((uri) =>{
+            console.log("Avatar uri: " + uri);
+            console.log("ENS name: " + ctx.ensName);
+        });
+    }
+
+    function testDAS(){
+        //
+    }
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    setTimeout(testENS, 1000);
+});
+</script>
+
+</html>
