@@ -8,27 +8,43 @@
     <script defer="defer" src="../dist/avatar.js?v=202203221933"></script>
 </head>
 
-<body></body>
+<body>
+    <h3>ENS test</h3>
+    <p>// 0xd8da6bf26964af9d7eed9e03e53415d37aa96045</p>
+    <p>ENS name: <span id="spanEns"></span></p>
+    <img id="imgEnsAvatar" style="width: 128px; height: 128px;" />
 
+    <h3>DAS test</h3>
+    <p>// 0x2bA1473Cb3973C288312a92FB8930bB0aF2cAe02</p>
+    <p>DID name: <span id="spanDid"></span></p>
+    <img id="imgDidAvatar" style="width: 128px; height: 128px;" />
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     var ctx;
     function testENS() {
         ctx = new AvatarCore.ID.ENSContext(null);
         ctx.getAvatarUri("0xd8da6bf26964af9d7eed9e03e53415d37aa96045").then((uri) =>{
-            console.log("Avatar uri: " + uri);
-            console.log("ENS name: " + ctx.ensName);
+            // console.log("Avatar uri: " + uri);
+            // console.log("ENS name: " + ctx.ensName);
+            $("#spanEns").text(ctx.ensName);
+            $("#imgEnsAvatar").attr('src', uri);
         });
     }
 
     function testDAS(){
         ctx = new AvatarCore.ID.DASContext();
         ctx.process("0x2bA1473Cb3973C288312a92FB8930bB0aF2cAe02").then(() =>{
-            console.log("Avatar uri: " + ctx.AvatarUri);
-            console.log("DID: " + ctx.DID);
+            // console.log("Avatar uri: " + ctx.AvatarUri);
+            // console.log("DID: " + ctx.DID);
+            $("#spanDid").text(ctx.DID);
+            $("#imgDidAvatar").attr('src', ctx.AvatarUri);
         });
     }
 
 document.addEventListener("DOMContentLoaded", function(event) {
+    //setTimeout(testENS, 1000);
     setTimeout(testDAS, 1000);
 });
 </script>
